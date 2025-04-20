@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Power Consumption Predictor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background-color: #1e2a38;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      width: 400px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #00ffcc;
+    }
+    label {
+      display: block;
+      margin: 15px 0 5px;
+    }
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: none;
+      outline: none;
+      background-color: #34495e;
+      color: white;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      background-color: #00ffcc;
+      color: #000;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+    button:hover {
+      background-color: #00cc99;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #2ecc71;
+      color: black;
+      border-radius: 6px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Predict Power Usage (Zone 1)</h1>
+    <form method="POST" action="/predict">
+      <label for="temperature">Temperature</label>
+      <input type="number" name="temperature" step="any" required>
+
+      <label for="humidity">Humidity</label>
+      <input type="number" name="humidity" step="any" required>
+
+      <label for="wind">Wind Speed</label>
+      <input type="number" name="wind" step="any" required>
+
+      <label for="general_diffuse">General Diffuse Flows</label>
+      <input type="number" name="general_diffuse" step="any" required>
+
+      <label for="diffuse">Diffuse Flows</label>
+      <input type="number" name="diffuse" step="any" required>
+
+      <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction %}
+    <div class="result">
+      <strong>Predicted Power Consumption (Zone 1):</strong><br> {{ prediction }} kWh
+    </div>
+    {% endif %}
+  </div>
+</body>
+</html>
